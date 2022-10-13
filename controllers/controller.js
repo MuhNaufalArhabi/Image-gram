@@ -8,14 +8,17 @@ const { Op } = require('sequelize')
 class Controller {
     static home(req, res) {
         const { search, tag} = req.query
-        let option = {include: {
-            model: Tag
-            },
+        let option = {
+            include: [
+                {model: Tag},
+                {model: User}
+            ],
             order: [
                 ['createdAt', 'DESC']
             ],
             where: {}
         }
+
         if (search){
             option.where.content = {
                     [Op.iLike] : `%${search}%`  
@@ -28,11 +31,10 @@ class Controller {
             if(tag == 'food') option.where.TagId = 3
             if(tag == 'news') option.where.TagId = 4
         }
-        const { user } = req.session
         Post.findAll(option)
             .then(post => {
                 req.session.post = post
-                res.render('home', { post, user, publish })
+                res.render('home', { post, publish })
             })
             .catch(err => res.send(err))
     }
@@ -106,6 +108,11 @@ class Controller {
         res.render('signup', { errors } )
     }
 
+    static logout(req, res) {
+        req.session.destroy()
+        res.redirect('/login')
+    }
+
     static postRegister(req, res) {
         const { username, password, email, role, firstName, lastName, dateOfBirth, phoneNumber } = req.body
 
@@ -161,10 +168,8 @@ class Controller {
     static createPost(req, res) {
         const { id } = req.session.user
         const { title, content, imageURL, tag } = req.body
-        console.log(tag, 'tag atas')
         Tag.findOne({ where: { name: tag } })
             .then(tag => {
-                console.log(tag, 'tag bawah')
                 return Post.create({ title, content, imageURL, UserId: id, TagId: tag.id })
             })
             .then(() => {

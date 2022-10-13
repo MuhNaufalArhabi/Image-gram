@@ -1,6 +1,5 @@
 'use strict';
 const fs = require('fs')
-
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   up (queryInterface, Sequelize) {
@@ -13,16 +12,16 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-   const user = JSON.parse(fs.readFileSync('./data/users.json', 'utf-8')).map(el => {
+   const tag = JSON.parse(fs.readFileSync('./data/tag.json', 'utf-8'))
+   .map(el => {
     el.createdAt = el.updatedAt = new Date()
     return el
    })
-
-   return queryInterface.bulkInsert('Users', user)
+   return queryInterface.bulkInsert('Tags', tag)
   },
 
   down (queryInterface, Sequelize) {
-    return queryInterface.bulkDelete('Users')
+    return queryInterface.bulkDelete('Tags')
     /**
      * Add commands to revert seed here.
      *

@@ -17,6 +17,10 @@ module.exports = (sequelize, DataTypes) => {
     get formattedDob() {
       return this.dateOfBirth = this.dateOfBirth.toLocaleDateString('en-CA', {year:"numeric", month:"numeric", day:"numeric"})
     }
+
+    formatPhone (data) {
+      
+    }
   }
   Profile.init({
     firstName: {

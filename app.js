@@ -10,7 +10,8 @@ app.use(session({
     saveUninitialized: false,
     cookie: { 
         secure: false,
-        sameSite: true
+        sameSite: true,
+        maxAge: 300000
     }
 }))
 app.use(route)

@@ -32,6 +32,7 @@ module.exports = (sequelize, DataTypes) => {
     cleanser.addWords(['anjing', 'babi'])
     post.content = cleanser.replace(post.content)
     post.title = cleanser.replace(post.title)
+    post.likes = 0
   })
   return Post;
 };
