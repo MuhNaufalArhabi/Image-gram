@@ -17,10 +17,15 @@ class Controller {
     }
 
     static postRegister(req, res) {
-        const {username, password, email, role} = req.body
+        const {username, password, email, role, firstName, lastName, dateOfBirth, phoneNumber} = req.body
 
         User.create({username, password, email, role})
-            .then(user => {
+            .then(result => {
+
+                let userId = result.dataValues.id
+                return Profile.create({firstName, lastName, dateOfBirth, phoneNumber, UserId: userId})
+            })
+            .then(result => {
                 res.redirect('/login')
             })
             .catch(err => res.send(err))
@@ -37,7 +42,7 @@ class Controller {
                     const validPass = bcrypt.compareSync(password, user.password)
 
                     if(validPass){
-                        req.session.userId = user.id
+                        req.session.user = user
                        return res.redirect('/user')
                     } else {
                         return res.redirect(`/login?errors=${errors}`)
