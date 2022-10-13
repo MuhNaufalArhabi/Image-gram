@@ -12,35 +12,45 @@
     <!-- NAVBAR: Home - Logout - Profile -->
     <%- include('./partials/navbar') %> 
     <br>
-    <form action="/user/profile/edit" method="post">
-        <p>
-            First Name:
-            <br>
-            <input type="text" name="firstName" value="<%= profile.firstName %>">
-        </p>
-        <p>
-            Last Name:
-            <br>
-            <input type="text" name="lastName" value="<%= profile.lastName %>">
-        </p>
-        <p>
-            Date of Birth:
-            <br>
-            <input type="date" name="dateOfBirth" value="<%= profile.formattedDob %>">
-        </p>
-        <p>
-            Phone Number:
-            <br>
-            <input type="number" name="phoneNumber" value="<%= profile.phoneNumber %>">
-        </p>
-        <p>
-            Email:
-            <br>
-            <input type="text" name="email" value="<%= profile.User.email %>">
-        </p>
-        <p>
-            <input type="submit" value="Update Profile">
-        </p>
-    </form>
+    <div class="container">
+        <% if (errors) { %>
+            <% errors.split(',').forEach(x => { %>
+              <p style="color: red;">
+                <%= x %> 
+              </p>
+            <% }) %> 
+          <% } %>
+    
+        <form action="/user/profile/edit" method="post" class="form">
+            <p class="form-label" >
+                First Name:
+                <br>
+                <input type="text" name="firstName" value="<%= profile.firstName %>" class="form form-control">
+            </p>
+            <p class="form-label">
+                Last Name:
+                <br>
+                <input type="text" name="lastName" value="<%= profile.lastName %>" class="form form-control">
+            </p>
+            <p class="form-label">
+                Date of Birth:
+                <br>
+                <input type="date" name="dateOfBirth" value="<%= profile.formattedDob %>" class="form form-control">
+            </p>
+            <p class="form-label">
+                Phone Number:
+                <br>
+                <input type="number" name="phoneNumber" value="<%= profile.phoneNumber %>" class="form form-control">
+            </p>
+            <p class="form-label">
+                Email:
+                <br>
+                <input type="text" name="email" value="<%= profile.User.email %>" class="form form-control">
+            </p>
+            <p>
+                <input type="submit" value="Update Profile">
+            </p>
+        </form>
+    </div>
 </body>
 </html>

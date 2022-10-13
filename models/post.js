@@ -2,6 +2,7 @@
 const {
   Model
 } = require('sequelize');
+const cleanser = require('profanity-cleanser')
 module.exports = (sequelize, DataTypes) => {
   class Post extends Model {
     /**
@@ -18,10 +19,19 @@ module.exports = (sequelize, DataTypes) => {
   Post.init({
     title: DataTypes.STRING,
     content: DataTypes.TEXT,
-    imageURL: DataTypes.STRING
+    imageURL: DataTypes.STRING,
+    createdAt: DataTypes.DATE,
+    likes: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Post',
   });
+
+  Post.beforeCreate((post, option) => {
+    cleanser.setLocale()
+    cleanser.addWords(['anjing', 'babi'])
+    post.content = cleanser.replace(post.content)
+    post.title = cleanser.replace(post.title)
+  })
   return Post;
 };

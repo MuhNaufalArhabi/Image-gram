@@ -1,21 +1,40 @@
 
-
+const { publish } = require('../helpers/helpers')
 const { User, Profile, Post, Tag } = require('../models')
 const bcrypt = require('bcryptjs')
+const { Op } = require('sequelize')
 
 
 class Controller {
     static home(req, res) {
-        const {user} = req.session
-        Post.findAll({
-            include: {
-                model: Tag
+        const { search, tag} = req.query
+        let option = {include: {
+            model: Tag
+            },
+            order: [
+                ['createdAt', 'DESC']
+            ],
+            where: {}
+        }
+        if (search){
+            option.where.content = {
+                    [Op.iLike] : `%${search}%`  
             }
-        })
-        .then(post => {
-            res.render('home', {post, user})
-        })
-        .catch(err => res.send(err))
+        }
+
+        if (tag) {
+            if(tag == 'animal') option.where.TagId = 1
+            if(tag == 'comedy') option.where.TagId = 2
+            if(tag == 'food') option.where.TagId = 3
+            if(tag == 'news') option.where.TagId = 4
+        }
+        const { user } = req.session
+        Post.findAll(option)
+            .then(post => {
+                req.session.post = post
+                res.render('home', { post, user, publish })
+            })
+            .catch(err => res.send(err))
     }
 
     static profile(req, res) {
@@ -23,29 +42,30 @@ class Controller {
 
         Profile.findOne({
             include: User,
-             where: { UserId: id }
+            where: { UserId: id }
+        })
+            .then(profile => {
+                res.render('profile', { profile })
             })
-        .then(profile => {
-            res.render('profile', { profile })
-        })
-        .catch(err => {
-            res.send(err)
-        })
+            .catch(err => {
+                res.send(err)
+            })
     }
 
     static editProfileForm(req, res) {
         const { id } = req.session.user
+        const {errors} = req.query
 
         Profile.findOne({
             include: User,
-             where: { UserId: id }
+            where: { UserId: id }
+        })
+            .then(profile => {
+                res.render('edit-profile', { profile, errors })
             })
-        .then(profile => {
-            res.render('edit-profile', { profile })
-        })
-        .catch(err => {
-            res.send(err)
-        })
+            .catch(err => {
+                res.send(err)
+            })
     }
 
     static updateProfile(req, res) {
@@ -55,12 +75,20 @@ class Controller {
             include: User,
             where: { UserId: id }
         })
-        .then(result => {
-            res.redirect('/user/profile')
-        })
-        .catch(err => {
-            res.send(err)
-        })
+            .then(result => {
+                res.redirect('/user/profile')
+            })
+            .catch(err =>{
+                let errors
+                 if (err.name == 'SequelizeValidationError'){
+                    errors = err.errors.map(el => {
+                        return el.message
+                    })
+                    res.redirect(`/user/profile/edit?errors=${errors.join(',')}`)
+                } else {
+                    res.send(err)
+                }
+            })
 
     }
 
@@ -74,7 +102,8 @@ class Controller {
     }
 
     static registerForm(req, res) {
-        res.render('signup')
+        const {errors} = req.query
+        res.render('signup', { errors } )
     }
 
     static postRegister(req, res) {
@@ -89,7 +118,17 @@ class Controller {
             .then(() => {
                 res.redirect('/login')
             })
-            .catch(err => res.send(err))
+            .catch(err =>{
+                let errors
+                 if (err.name == 'SequelizeValidationError'){
+                    errors = err.errors.map(el => {
+                        return el.message
+                    })
+                    res.redirect(`/signup?errors=${errors.join(',')}`)
+                } else {
+                    res.send(err)
+                }
+            })
     }
 
     static postLogin(req, res) {
@@ -115,26 +154,47 @@ class Controller {
             .catch(err => res.send(err))
     }
 
-    static postAdd (req, res) {
+    static postAdd(req, res) {
         res.redirect('/user')
     }
 
-    static createPost (req, res) {
-        const {id} = req.session.user
-        const {title, content, imageURL, tag} = req.body
+    static createPost(req, res) {
+        const { id } = req.session.user
+        const { title, content, imageURL, tag } = req.body
         console.log(tag, 'tag atas')
-        Tag.findOne({where:{name: tag}})
-        .then(tag => {
-            console.log(tag, 'tag bawah')
-            return Post.create({title, content, imageURL, UserId: id, TagId: tag.id})
-        })
-        .then(() => {
-            res.redirect('/user')
-        })
-        .catch(err => res.send(err))
+        Tag.findOne({ where: { name: tag } })
+            .then(tag => {
+                console.log(tag, 'tag bawah')
+                return Post.create({ title, content, imageURL, UserId: id, TagId: tag.id })
+            })
+            .then(() => {
+                res.redirect('/user')
+            })
+            .catch(err => res.send(err))
     }
 
+    static postLike(req, res) {
+        const {id} = req.params
+        Post.increment({'likes': 1}, {where: {id}})
+            .then(() => {
+                res.redirect('/user')
+            })
+            .catch(err => res.send(err))
+    }
 
+    static deletePost(req, res) {
+        const {id} = req.params
+        Post.destroy({
+            where: {
+                id
+            }
+        })
+            .then(() => {
+                res.redirect('/user')
+            })
+            .catch(err => res.send(err))
+
+    }
 }
 
 module.exports = Controller

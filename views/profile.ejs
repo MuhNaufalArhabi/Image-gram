@@ -11,18 +11,10 @@
 <body>
     <!-- NAVBAR: Home - Logout - Profile -->
     <%- include('./partials/navbar') %> 
-    <h1>Hello, <%= profile.firstName %> <%= profile.lastName %></h1>
-    <div>
-        <p>
+    <div class="container">
+        <h1>Hello, <%= profile.firstName %> <%= profile.lastName %></h1>
 
-            Role: <%= profile.User.role %>
-        </p>
-        <p>
-            Date of Birth: <%= profile.formattedDob %>
-        </p>
-        <p>
-            Phone Number: <%= profile.phoneNumber %>
-        </p>
+        <img src="https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=" height="150" alt="">
         <p>
             Role: <%= profile.User.role %>
         </p>

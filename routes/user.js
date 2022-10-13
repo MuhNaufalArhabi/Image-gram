@@ -7,4 +7,6 @@ route.get('/profile/edit', Controller.editProfileForm)
 route.post('/profile/edit', Controller.updateProfile)
 route.get('/post/add', Controller.postAdd)
 route.post('/post/add', Controller.createPost)
+route.get('/post/:id/likes', Controller.postLike)
+route.get('/post/:id/delete', Controller.deletePost)
 module.exports = route

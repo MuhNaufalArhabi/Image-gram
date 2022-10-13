@@ -26,25 +26,26 @@
                                 <div>
                                     <!-- TAGS -->
                                     <form action="/user" method="get">
-                                        <input type="button" name="name" value="animal">
-                                        <input type="button" name="name" value="comedy">
-                                        <input type="button" name="name" value="food">
-                                        <input type="button" name="name" value="news">
+                                        <input type="submit" class="btn btn-dark" name="tag" value="animal">
+                                        <input type="submit" class="btn btn-dark" name="tag" value="comedy">
+                                        <input type="submit" class="btn btn-dark" name="tag" value="food">
+                                        <input type="submit" class="btn btn-dark" name="tag" value="news">
                                     </form>
                                     <br>
                                     <!-- POST -->
                                     <div>
                                         <form action="/user/post/add" method="post">
                                             <input type="text" name="imageURL" style="width: 291px"
-                                                placeholder="Please insert ImageURL">
+                                                placeholder="Please insert ImageURL" class="form-control">
                                             <br>
                                             <input type="text" name="title" style="width: 291px"
-                                                placeholder="Please insert Title">
+                                                placeholder="Please insert Title"  class="form-control">
                                             <br>
                                             <textarea name="content" cols="40" rows="5"
-                                                placeholder="Please insert Description"></textarea>
+                                                placeholder="Please insert Description" class="form-control"></textarea>
                                             <br>
-                                            <select name="tag">
+                                            <select name="tag"  class="form-control">
+                                                <option value="" disabled selected>--Tag--</option>
                                                 <option value="animal">Animal</option>
                                                 <option value="comedy">Comedy</option>
                                                 <option value="food">Food</option>
@@ -68,37 +69,40 @@
                     <div class="col-md-6">
                         <div class="card">
                             <div class="d-flex justify-content-between p-2 px-3">
-                                <div class="d-flex flex-row align-items-center"> <img src=" " width="50"
+                                <div class="d-flex flex-row align-items-center"> <img src="https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=" width="50"
                                         class="rounded-circle">
                                     <div class="d-flex flex-column ml-2">
                                         <span class="font-weight-bold">
-                                            <%= x.title %>
+                                            <%= user.username %>
                                         </span>
                                         <small class="text-primary"><%= x.Tag.name %> </small>
                                     </div>
                                 </div>
                                 <div class="d-flex flex-row mt-1 ellipsis">
-                                    <small class="mr-2">20 mins</small>
+                                    <small class="mr-2"><%= publish(x.createdAt) %></small>
                                     <i class="fa fa-ellipsis-h"></i>
                                 </div>
                             </div>
-                            <img src="<%= x.imageURL %>" class="img-fluid">
+                            <img src="<%= x.imageURL %>" class="img-fluid" alt="<%= x.title %>" >
                             <div class="p-2">
                                 <hr>
                                 <p class="text-justify">
                                     <%= x.content %>
                                 </p>
                                 <hr>
+                                <div>
+                                    <p><%= x.likes %> </p>
+                                </div>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="d-flex flex-row icons d-flex align-items-center">
                                         <i class="fa fa-heart"></i> <i class="fa fa-smile-o ml-2"></i>
                                     </div>
                                     <div class="d-flex flex-row muted-color">
                                         <% if (user.role !=='admin' ) { %>
-                                            <a href="/user/post/likes" class="btn btn-primary">Like</a>
+                                            <a href="/user/post/<%= x.id %>/likes" class="btn btn-primary">Like</a>
                                             <% } else {%>
-                                                <a href="/user/post/likes" class="btn btn-primary">Like</a>
-                                                <a href="/user/post/delete" class="btn btn-danger">Delete</a>
+                                                <a href="/user/post/<%= x.id %>/likes" class="btn btn-primary">Like</a>
+                                                <a href="/user/post/<%= x.id %>/delete" class="btn btn-danger">Delete</a>
                                                 <% } %>
                                     </div>
                                 </div>

@@ -15,12 +15,57 @@ module.exports = (sequelize, DataTypes) => {
       User.hasOne(models.Profile)
       User.hasMany(models.Post)
     }
+
+    formatEmail(data){
+      return this.email = data.toLowerCase()
+    }
   }
   User.init({
-    username: DataTypes.STRING,
-    password: DataTypes.STRING,
-    email: DataTypes.STRING,
-    role: DataTypes.STRING
+    username: {
+      type: DataTypes.STRING,
+      allowNull : false,
+      validate: {
+        notEmpty : {
+          msg: 'Username is required'
+        },
+        notNull : {
+          msg: 'Username is required'
+        }
+      }
+    },
+    password: {
+      type: DataTypes.STRING,
+      allowNull : false,
+      validate: {
+        notEmpty : {
+          msg: 'Password is required'
+        },
+        notNull : {
+          msg: 'Password is required'
+        }
+      }
+    },
+    email: {
+      type: DataTypes.STRING,
+      allowNull : false,
+      validate: {
+        isEmail: {
+          msg: `Email format must be with @`
+        }
+      }
+    },
+    role: {
+      type: DataTypes.STRING,
+      allowNull : false,
+      validate: {
+        notEmpty : {
+          msg: 'Role is required'
+        },
+        notNull : {
+          msg: 'Role is required'
+        }
+      }
+    }
   }, {
     sequelize,
     modelName: 'User',
@@ -29,6 +74,7 @@ module.exports = (sequelize, DataTypes) => {
   User.beforeCreate((user, option) => {
     let salt = bcrypt.genSaltSync(6);
     let hash = bcrypt.hashSync(user.password, salt);
+    user.email = user.formatEmail(user.email)
     user.password = hash
   })
   return User;
