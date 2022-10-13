@@ -5,7 +5,7 @@ const user = require('./user')
 const signup = require('./signup')
 
 const valid = (req, res, next) => {
-    if (!req.session.userId){
+    if (!req.session.user){
         res.riderect('/')
     } else {
         next()
