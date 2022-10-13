@@ -1,0 +1,31 @@
+{
+  "name": "image-gram",
+  "version": "1.0.0",
+  "description": "route\r get'/' login atau register\r get'/sign-up' register account\r post'/sign-up' register account\r get'/user' menampilkan semua post\r get'/user/profile' menampilkan halaman profile\r get'/user/profile/edit' halaman edit\r post'/user/profile/edit' memasukkan hasil edit ke database\r get'/user/post/add' menampilkan add form untuk post\r post'/user/post/add' memasukkan data ke database\r get'/user/post/delete' menghapus post\r get'/user/post/likes' menambah like",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MuhNaufalArhabi/Image-gram.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MuhNaufalArhabi/Image-gram/issues"
+  },
+  "homepage": "https://github.com/MuhNaufalArhabi/Image-gram#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "ejs": "^3.1.8",
+    "express": "^4.18.2",
+    "express-session": "^1.17.3",
+    "pg": "^8.8.0",
+    "sequelize": "^6.25.0"
+  },
+  "devDependencies": {
+    "sequelize-cli": "^6.5.1"
+  }
+}
