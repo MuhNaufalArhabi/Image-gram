@@ -9,25 +9,19 @@
 <body>
     <!-- NAVBAR: Home - Logout - Profile -->
     <%- include('./partials/navbar') %> 
-    <h1>Hello, (Nama User)</h1>
+    <h1>Hello, <%= profile.firstName %> <%= profile.lastName %></h1>
     <div>
         <p>
-            First Name: (firstName)
+            Role: <%= profile.User.role %>
         </p>
         <p>
-            Last Name: (lastName)
+            Date of Birth: <%= profile.formattedDob %>
         </p>
         <p>
-            Date of Birth: (yyyy/mm/dd atau dd/mm/yyy)
+            Phone Number: <%= profile.phoneNumber %>
         </p>
         <p>
-            Phone Number: (phoneNumber)
-        </p>
-        <p>
-            Email: (email)
-        </p>
-        <p>
-            Role: (role)
+            Email: <%= profile.User.email %>
         </p>
         <p>
             <a href="/user/profile/edit"><input type="button" value="Edit Profile"></a>

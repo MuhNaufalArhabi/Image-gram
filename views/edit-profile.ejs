@@ -12,29 +12,29 @@
     <br>
     <form action="/user/profile/edit" method="post">
         <p>
-            First Name: (firstName)
+            First Name:
             <br>
-            <input type="text" name="firstName" value="profile.firstName">
+            <input type="text" name="firstName" value="<%= profile.firstName %>">
         </p>
         <p>
-            Last Name: (lastName)
+            Last Name:
             <br>
-            <input type="text" name="lastName" value="profile.lastName">
+            <input type="text" name="lastName" value="<%= profile.lastName %>">
         </p>
         <p>
-            Date of Birth: (yyyy/mm/dd atau dd/mm/yyy)
+            Date of Birth:
             <br>
-            <input type="date" name="dateOfBirth" value="profile.dateOfBirth">
+            <input type="date" name="dateOfBirth" value="<%= profile.formattedDob %>">
         </p>
         <p>
-            Phone Number: (phoneNumber)
+            Phone Number:
             <br>
-            <input type="number" name="phoneNumber" value="profile.phoneNumber">
+            <input type="number" name="phoneNumber" value="<%= profile.phoneNumber %>">
         </p>
         <p>
-            Email: (email)
+            Email:
             <br>
-            <input type="text" name="email" value="user.email">
+            <input type="text" name="email" value="<%= profile.User.email %>">
         </p>
         <p>
             <input type="submit" value="Update Profile">
