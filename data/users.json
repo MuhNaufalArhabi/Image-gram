@@ -1,21 +1,26 @@
 [{
-    "username": "Lawry Bernli",
-    "password": "MRhZEeA8l0j",
-    "role": "admin"
-  }, {
-    "username": "Philis Bandey",
-    "password": "QRbF7etLO",
-    "role": "admin"
-  }, {
-    "username": "Jacklin Widdowson",
-    "password": "czl7spHle9",
-    "role": "user"
-  }, {
-    "username": "Aidan Gribble",
-    "password": "E36d9ZRIyN2",
-    "role": "user"
-  }, {
-    "username": "Mirella Barratt",
-    "password": "uOT98Um",
-    "role": "user"
-  }]
+  "username": "Isis Kullmann",
+  "password": "SOWCmYAFM0",
+  "email": "ikullmann0@reddit.com",
+  "role": "user"
+}, {
+  "username": "Adorne Rizzardo",
+  "password": "YFwAYG1U4f",
+  "email": "arizzardo1@ezinearticles.com",
+  "role": "user"
+}, {
+  "username": "Clive Doog",
+  "password": "hYlDLXbdsk",
+  "email": "cdoog2@va.gov",
+  "role": "user"
+}, {
+  "username": "Madonna Dumini",
+  "password": "aOEcgB",
+  "email": "mdumini3@geocities.jp",
+  "role": "admin"
+}, {
+  "username": "Ameline Bonett",
+  "password": "XlkkKrZs",
+  "email": "abonett4@google.com.hk",
+  "role": "user"
+}]
