@@ -20,27 +20,7 @@ class Controller {
 
     static profile(req, res) {
         const { id } = req.session.user
-<<<<<<< HEAD
-        Profile.findOne({ where: { id } })
-            .then(profile => {
-                res.render('profile', { profile })
-            })
-            .catch(err => {
-                res.send(err)
-            })
-    }
 
-    static editProfileForm(req, res) {
-        User.findAll({
-            include: Profile
-        })
-            .then(result => {
-                res.render('edit-profile', { result })
-            })
-            .catch(err => {
-                res.send(err)
-            })
-=======
         Profile.findOne({
             include: User,
              where: { UserId: id }
@@ -55,6 +35,7 @@ class Controller {
 
     static editProfileForm(req, res) {
         const { id } = req.session.user
+
         Profile.findOne({
             include: User,
              where: { UserId: id }
@@ -65,9 +46,7 @@ class Controller {
         .catch(err => {
             res.send(err)
         })
->>>>>>> e4b45fee48cc7a8b2dfc8704aed34e20e8e746d3
     }
-
 
     static updateProfile(req, res) {
         const { id } = req.session.user
@@ -76,12 +55,13 @@ class Controller {
             include: User,
             where: { UserId: id }
         })
-            .then(result => {
-                res.redirect('/user/profile')
-            })
-            .catch(err => {
-                res.send(err)
-            })
+        .then(result => {
+            res.redirect('/user/profile')
+        })
+        .catch(err => {
+            res.send(err)
+        })
+
     }
 
     static landingPage(req, res) {

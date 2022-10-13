@@ -14,15 +14,7 @@
     <h1>Hello, <%= profile.firstName %> <%= profile.lastName %></h1>
     <div>
         <p>
-<<<<<<< HEAD
-            First Name: <%= profile.firstName %> 
-        </p>
-        <p>
-            Last Name: <%= profile.lastName %> 
-        </p>
-        <p>
-            Date of Birth: <%= profile.dateOfBirth %> 
-=======
+
             Role: <%= profile.User.role %>
         </p>
         <p>
@@ -30,7 +22,15 @@
         </p>
         <p>
             Phone Number: <%= profile.phoneNumber %>
->>>>>>> e4b45fee48cc7a8b2dfc8704aed34e20e8e746d3
+        </p>
+        <p>
+            Role: <%= profile.User.role %>
+        </p>
+        <p>
+            Date of Birth: <%= profile.formattedDob %>
+        </p>
+        <p>
+            Phone Number: <%= profile.phoneNumber %>
         </p>
         <p>
             Email: <%= profile.User.email %>
