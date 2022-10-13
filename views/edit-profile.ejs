@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Profile Form</title>
+</head>
+<body>
+    <!-- NAVBAR: Home - Logout - Profile -->
+    <%- include('./partials/navbar') %> 
+    <br>
+    <form action="/user/profile/edit" method="post">
+        <p>
+            First Name: (firstName)
+            <br>
+            <input type="text" name="firstName" value="profile.firstName">
+        </p>
+        <p>
+            Last Name: (lastName)
+            <br>
+            <input type="text" name="lastName" value="profile.lastName">
+        </p>
+        <p>
+            Date of Birth: (yyyy/mm/dd atau dd/mm/yyy)
+            <br>
+            <input type="date" name="dateOfBirth" value="profile.dateOfBirth">
+        </p>
+        <p>
+            Phone Number: (phoneNumber)
+            <br>
+            <input type="number" name="phoneNumber" value="profile.phoneNumber">
+        </p>
+        <p>
+            Email: (email)
+            <br>
+            <input type="text" name="email" value="user.email">
+        </p>
+        <p>
+            <input type="submit" value="Update Profile">
+        </p>
+    </form>
+</body>
+</html>
