@@ -1,7 +1,9 @@
 # Image-gram
 
 route
-get'/' login atau register
+get'/' redirect ke login
+get'/login' login atau register
+post'/login' login
 get'/sign-up' register account
 post'/sign-up' register account
 get'/user' menampilkan semua post
