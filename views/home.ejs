@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+</head>
+<body>
+    <!-- NAVBAR: Home - Logout - Profile -->
+    <%- include('./partials/navbar') %> 
+    <br>
+    <br>
+    <!-- SEARCH -->
+    <div> 
+        <form action="/user" method="get">
+            <input type="text" name="title" style="width: 234px" placeholder="Seach...">
+            <input type="submit" value="Search">
+        </form>
+    </div>
+    <br>
+    <div>
+        <!-- TAGS -->
+        <form action="/user" method="get">
+            <input type="button" name="name" value="#animal">
+            <input type="button" name="name" value="#comedy">
+            <input type="button" name="name" value="#food">
+            <input type="button" name="name" value="#news">
+        </form>
+        <br>
+        <!-- POST -->
+        <form action="/user" method="post">
+            <input type="text" name="imageURL" style="width: 291px" placeholder="Please insert ImageURL">
+            <br>
+            <input type="text" name="title" style="width: 291px" placeholder="Please insert Title">
+            <br>
+            <textarea name="content" cols="40" rows="5" placeholder="Please insert Description"></textarea>
+            <br>
+            <input type="submit" value="Post">
+        </form>
+    </div>
+</body>
+</html>
