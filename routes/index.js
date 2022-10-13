@@ -6,7 +6,7 @@ const signup = require('./signup')
 
 const valid = (req, res, next) => {
     if (!req.session.user){
-        res.riderect('/')
+        res.redirect('/')
     } else {
         next()
     }
