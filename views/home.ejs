@@ -98,7 +98,7 @@
                                         <i class="fa fa-heart"></i> <i class="fa fa-smile-o ml-2"></i>
                                     </div>
                                     <div class="d-flex flex-row muted-color">
-                                        <% if (x.User.role !=='admin' ) { %>
+                                        <% if (main.role !=='admin' ) { %>
                                             <a href="/user/post/<%= x.id %>/likes" class="btn btn-primary">Like</a>
                                             <% } else {%>
                                                 <a href="/user/post/<%= x.id %>/likes" class="btn btn-primary">Like</a>

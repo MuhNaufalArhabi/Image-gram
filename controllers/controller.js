@@ -7,6 +7,8 @@ const { Op } = require('sequelize')
 
 class Controller {
     static home(req, res) {
+        let {user} = req.session
+        let main = user
         const { search, tag} = req.query
         let option = {
             include: [
@@ -34,7 +36,7 @@ class Controller {
         Post.findAll(option)
             .then(post => {
                 req.session.post = post
-                res.render('home', { post, publish })
+                res.render('home', { post,main, publish })
             })
             .catch(err => res.send(err))
     }
